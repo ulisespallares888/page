@@ -12,7 +12,7 @@ def home(request):
             usuario = "Anónimo"
 
         if contenido:
-            mensaje = Mensaje(contenido=contenido, usuario=usuario)
+            mensaje = Mensaje(contenido=contenido, usuario=usuario, direccion_ip = client_ip)
             mensaje.save()
 
         return redirect('home')
@@ -26,4 +26,6 @@ def home(request):
     mensajes = Mensaje.objects.all().order_by('-fecha_creacion')
     return render(request, 'index.html', {'mensajes': mensajes})
 
-
+def ips(request):
+   mensajes =  Mensaje.objects.all()
+   return render(request, 'control.html', {'mensajes': mensajes})
