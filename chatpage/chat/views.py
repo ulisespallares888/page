@@ -19,7 +19,7 @@ def home(request):
 
     mensajes = Mensaje.objects.all().order_by('-fecha_creacion')
 
-    if mensajes.count() > 4:
+    if mensajes.count() > 10:
         mensaje_ultimo = mensajes.first()
         mensajes.exclude(pk=mensaje_ultimo.pk).delete()
 
