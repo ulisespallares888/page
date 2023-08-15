@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiVidaConectada - Comparte tus Momentos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6479172116764029"
+     crossorigin="anonymous">
+    </script>
+
+     
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo transparente */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            margin: auto;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 500px; /* Ajusta la altura del área de chat */
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrar los mensajes horizontalmente */
+            margin-bottom: 10px;
+        }
+
+        .message {
+    background-color: #e1f5fe;
+    padding: 8px 12px;
+    border-radius: 20px;
+    max-width: 100%; /* Ancho máximo para cubrir el área del chat */
+    word-wrap: break-word; /* Agrega esta propiedad para ajustar los mensajes largos */
+}
+
+        .message strong {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .message.anonymous {
+            background-color: #f0f0f0;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-container input[type="text"] {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid #ccc;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header  style="text-align: center; margin-top: 20px;">
+        <h1>MiVidaConectada</h1>
+        <p>Comparte tus Momentos</p>
+    </header>
+
+    <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+            {% for mensaje in mensajes %}
+            <div class="message-container">
+                <div class="message {% if mensaje.usuario == 'Anónimo' %}anonymous{% endif %}">
+                    <strong>{{ mensaje.usuario }}:</strong> {{ mensaje.contenido }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <form method="post"  action="{% url 'home' %}">
+            {% csrf_token %}
+            <div class="input-container">
+                <input type="text" class="form-control" placeholder="Escribe tu mensaje..." name="message-input" id="message-input">
+                <input type="text" class="form-control" placeholder="Nombre de usuario (opcional)" name="username-input" id="username-input">
+                <button class="btn btn-primary" type="submit" name="send-button" id="send-button">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer">
+       <p>&copy; 2023 MiVidaConectada. Todos los derechos reservados. <a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+    </footer>
+
+
+</body>
+</html>
