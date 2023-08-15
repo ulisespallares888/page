@@ -3,7 +3,6 @@ from .models import Mensaje
 
 def home(request):
     client_ip = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
-    print("Client IP:", client_ip)
     if request.method == 'POST':
         contenido = request.POST.get('message-input')
         usuario = request.POST.get('username-input')

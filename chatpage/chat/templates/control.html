@@ -9,8 +9,8 @@
 <body>
  
     {% for mensaje in mensajes %}
-    
-        <strong>{{ mensaje.direccion_ip }}</strong>
+        <strong>{{ mensaje.usuario }} : {{ mensaje.direccion_ip }}</strong>
+
         <br>
     
     {% endfor %}
